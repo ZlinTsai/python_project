@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <script src="vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{ message }}
+        <button v-on:click="greet">Greet</button>
+        <p>綁定DOM元素click事件</p>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!' // 顯示在上面花括號的地方，這個是雙向綁定，即改變這個值頁面也會有反應
+            },
+            methods: {
+                greet: function (event) {
+                    alert('click greet')
+                    this.message = (new Date).toDateString() // 改變 message值 
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
