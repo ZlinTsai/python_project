@@ -1,0 +1,29 @@
+{% load static %}
+
+<div style="float: left; width: 20%;">
+    <h2>Records</h2>
+    <ul>
+      {% for record in records %}
+        <li><a href="{% url 'record_detail' record.id %}">Record {{ record.id }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  
+  <div style="float: left; width: 60%;">
+    <h2>Image</h2>
+    {% if selected_record %}
+      <img src="{% static 'images/'|add:selected_record.filename %}" alt="{% static 'images/' selected_record.filename %}">
+    {% else %}
+      <p>No record selected.</p>
+    {% endif %}
+  </div>
+  
+  <div style="float: left; width: 20%;">
+    <h2>Result</h2>
+    {% if selected_record %}
+      <p>Result: {{ selected_record.result }}</p>
+    {% else %}
+      <p>No record selected.</p>
+    {% endif %}
+  </div>
+  
