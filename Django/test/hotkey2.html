@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>移動目標按鈕</title>
+  <style>
+    .selected {
+      background-color: yellow;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <button class="button" onclick="href='1';" href="1">按鈕1</button>
+    <button class="button" onclick="href='2';" href="2">按鈕2</button>
+    <button class="button" onclick="href='3';" href="3">按鈕3</button>
+    <button class="button" onclick="href='4';" href="4">按鈕4</button>
+    <button class="button" onclick="href='5';" href="5">按鈕5</button>
+  </div>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var currentSelection = 0; // 目前選擇的按鈕索引
+
+      var buttons = document.getElementsByClassName('button');
+
+      // 監聽鍵盤按鍵事件
+      document.addEventListener('keydown', function(event) {
+        // 移除目前選擇按鈕的選擇樣式
+        buttons[currentSelection].classList.remove('selected');
+
+        // 根據按鍵方向更新目前選擇的按鈕索引
+        if (event.key === 'ArrowLeft' && currentSelection > 0) {
+          currentSelection--;
+        } else if (event.key === 'ArrowRight' && currentSelection < buttons.length - 1) {
+          currentSelection++;
+        }
+
+        // 將新選擇的按鈕套用選擇樣式
+        buttons[currentSelection].classList.add('selected');
+      });
+
+      // 監聽按鈕點擊事件
+      Array.from(buttons).forEach(function(button, index) {
+        button.addEventListener('click', function() {
+          // 移除目前選擇按鈕的選擇樣式
+          buttons[currentSelection].classList.remove('selected');
+
+          // 更新目前選擇的按鈕索引
+          currentSelection = index;
+
+          // 將新選擇的按鈕套用選擇樣式
+          buttons[currentSelection].classList.add('selected');
+        });
+      });
+
+      // 監聽按鍵按下事件
+      document.addEventListener('keydown', function(event) {
+        // 按下Enter鍵時
+        if (event.key === 'Enter') {
+          var targetUrl = buttons[currentSelection].getAttribute('href');
+          if (targetUrl) {
+            window.location.href = targetUrl; // 連結到目標超連結
+          }
+        }
+      });
+    });
+</script>
+
+</html>

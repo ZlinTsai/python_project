@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .selected {
+      border: 2px solid red;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <button class="recheckButton">Button 00</button>
+    <button class="recheckButton">Button 01</button>
+    <button class="recheckButton">Button 02</button>
+    <button class="recheckButton">Button 03</button>
+    <button class="recheckButton">Button 04</button>
+	<br>
+	<button class="recheckButton">Button 10</button>
+	<button class="recheckButton">Button 11</button>
+	<button class="recheckButton">Button 12</button>
+	<button class="recheckButton">Button 13</button>
+	<button class="recheckButton">Button 14</button>
+  </div>
+
+  <script>
+    // Get all button elements
+    var buttons = document.getElementsByClassName('recheckButton');
+    // Initial selected target index
+    var selectedIndex = 0;
+	// width and length
+	var row = 2;
+	var col = 5;
+
+    // Add keyboard event listener to the document; 37 left; 38 up; 39 right; 40 down
+    document.addEventListener('keydown', function(event) {
+      // Check if the pressed key is the left arrow key
+      if (event.keyCode === 37) {
+        // Decrease the target index, ensuring it doesn't go below 0
+        selectedIndex = (selectedIndex - 1 + buttons.length) % buttons.length;
+      }
+	  // Check if the pressed key is the up arrow key
+      else if (event.keyCode === 38) {
+        // Increase the target index, ensuring it doesn't exceed the number of buttons
+        selectedIndex = (selectedIndex - 1 + buttons.length) % buttons.length;
+      }
+	  // Check if the pressed key is the right arrow key
+      else if (event.keyCode === 39) {
+        // Increase the target index, ensuring it doesn't exceed the number of buttons
+        selectedIndex = (selectedIndex + 1) % buttons.length;
+      }
+      // Check if the pressed key is the down arrow key
+      else if (event.keyCode === 40) {
+        // Increase the target index, ensuring it doesn't exceed the number of buttons
+        selectedIndex = (selectedIndex + 1) % buttons.length;
+      }
+
+      // Remove the style from the previously selected target
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('selected');
+      }
+
+      // Add style to the newly selected target
+      buttons[selectedIndex].classList.add('selected');
+	  
+	  // Adjust the selectIndex based on the currently selected button
+      selectedIndex = Array.prototype.indexOf.call(buttons, document.activeElement);
+    });
+  </script>
+</body>
+</html>
